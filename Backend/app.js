@@ -1,14 +1,21 @@
-const dotenv = require('dotenv');       
+const dotenv = require("dotenv");
 dotenv.config();
-const cors = require('cors');
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 const app = express();
+const connectDB = require("./db/db");
+const userRoutes = require("./routes/user.routes");
 
-app.use(cors())
+connectDB();
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-    res.send("Hey there!!");
-})
+  res.send("Hey there!!");
+});
+
+app.use("/users", userRoutes);
 
 module.exports = app;
