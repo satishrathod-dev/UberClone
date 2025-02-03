@@ -149,3 +149,98 @@ The request body should be in JSON format and include the following fields:
   },
 }
 ```
+
+
+# API Endpoints
+
+## /captains/login Endpoint
+
+### Description
+Authenticates a captain using their email and password, returning a JWT token upon successful login.
+
+### HTTP Method
+POST
+
+### Endpoint
+`/captains/login`
+
+### Request Body
+The request body should be in JSON format and include the following fields:
+
+- `email` (string, required): Captain's email address (must be a valid email).
+- `password` (string, required): Captain's password (minimum 6 characters).
+
+### Example Request
+```json
+{
+  "email": "testcaptain@example.com",
+  "password": "strongpassword"
+}
+```
+
+### Example Response
+```json
+{
+  "token": "JWT_Token_String",
+  "captain": {
+    "fullname": {
+      "firstname": "Test",
+      "lastname": "Captain"
+    },
+    "email": "testcaptain@example.com",
+    "vehicle": {
+      "color": "red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    }
+  }
+}
+```
+
+# /captains/profile Endpoint
+## Description
+Retrieves the profile information of the currently authenticated captain.
+
+## HTTP Method
+GET
+
+### Authentication
+Requires a valid JWT token in the Authorization header: Authorization: Bearer <token>
+
+## Example Response
+```json
+{
+  "captain": {
+    "fullname": {
+      "firstname": "Test",
+      "lastname": "Captain"
+    },
+    "email": "testcaptain@example.com",
+    "vehicle": {
+      "color": "red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    }
+  }
+}
+```
+
+# /captains/logout Endpoint
+
+## Description
+Logout the current captain and blacklist the token provided in cookie or headers.
+
+## HTTP Method
+GET
+
+### Authentication
+Requires a valid JWT token in the Authorization header or cookie.
+
+## Example Response
+```json
+{
+  "message": "Logout successfully."
+}
+```
