@@ -22,7 +22,7 @@ const UserLogin = () => {
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
         />
         <form onSubmit={submitHandler}>
-          <h3 className="text-lg font-medium mb-2">What's your name</h3>
+          <h3 className="text-lg font-medium mb-2">What's your email</h3>
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
