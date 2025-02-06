@@ -6,12 +6,12 @@ const UserSignup = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
 
   const submitHandler = (e) => {
     e.preventDefault();
     setUserData({
-      username: {
+      fullName: {
         firstName: firstName,
         lastName: lastName,
       },
@@ -33,7 +33,7 @@ const [userData, setUserData] = useState({});
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
         />
         <form onSubmit={submitHandler}>
-          <h3 className="text-lg w-1/2 font-medium mb-2">What's your name</h3>
+          <h3 className="text-lg w-full font-medium mb-2">What's your name</h3>
           <div className="flex gap-3 mb-7">
             <input
               required

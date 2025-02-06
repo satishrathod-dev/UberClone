@@ -11,7 +11,7 @@ const CaptainSignup = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     setCaptainData({
-      username: {
+      fullName: {
         firstName: firstName,
         lastName: lastName,
       },
@@ -33,24 +33,28 @@ const CaptainSignup = () => {
           src="https://www.svgrepo.com/show/505031/uber-driver.svg"
         />
         <form onSubmit={submitHandler}>
-          <h3 className="text-lg w-1/2 font-medium mb-2">What's your name</h3>
+          <h3 className="text-lg w-full font-medium mb-2">
+            What's our captain's name
+          </h3>
           <div className="flex gap-3 mb-7">
             <input
-            required
+              required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="First name"
               className="bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border  text-lg placeholder:text-base"
             />
             <input
-            required
+              required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder="Last name"
               className="bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border  text-lg placeholder:text-base"
             />
           </div>
-          <h3 className="text-lg font-medium mb-2">What's your email</h3>
+          <h3 className="text-lg font-medium mb-2">
+            What's our captain's email
+          </h3>
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}

@@ -22,7 +22,7 @@ const CaptainLogin = () => {
           src="https://www.svgrepo.com/show/505031/uber-driver.svg"
         />
         <form onSubmit={submitHandler}>
-          <h3 className="text-lg font-medium mb-2">What's your email</h3>
+          <h3 className="text-lg font-medium mb-2">What's our captain's email</h3>
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
