@@ -16,7 +16,7 @@ const Riding = () => {
           src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
         />
       </div>
-      <div className="1/2 p-4">
+      <div className="1/2 p-2">
         <div className="flex items-center justify-between">
           <img
             className="h-12"
