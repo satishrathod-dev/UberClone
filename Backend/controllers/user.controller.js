@@ -47,10 +47,7 @@ module.exports.loginUser = async (req, res, next) => {
     return res.status(401).json({ message: "Invalid Email or Password" });
   }
 
-  const isMatch = await user.comparePassword(password);
-  // console.log("Stored password:", user.password);
-  // console.log('input password:', password);
-  // console.log(isMatch);   
+  const isMatch = await user.comparePassword(password);   
 
   if (!isMatch) {
     return res.status(401).json({ message: "Invalid Email or Password" });

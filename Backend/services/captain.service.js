@@ -1,8 +1,8 @@
 const captainModel = require("../models/captain.model");
 
 module.exports.createCaptain = async ({
-  firstName,
-  lastName,
+  firstname,
+  lastname,
   email,
   password,
   color,
@@ -11,7 +11,7 @@ module.exports.createCaptain = async ({
   vehicleType,
 }) => {
   if (
-    !firstName ||
+    !firstname ||
     !email ||
     !password ||
     !color ||
@@ -24,8 +24,8 @@ module.exports.createCaptain = async ({
 
   const captain = captainModel.create({
     fullname: {
-      firstName,
-      lastName,
+      firstname,
+      lastname,
     },
     email,
     password,

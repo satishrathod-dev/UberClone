@@ -21,8 +21,8 @@ module.exports.registerCaptain = async (req, res, next) => {
   const hashedPassword = await captainModel.hashPassword(password);
 
   const captain = await captainService.createCaptain({
-    firstName: fullname.firstName,
-    lastName: fullname.lastName,
+    firstname: fullname.firstname,
+    lastname: fullname.lastname,
     email,
     password: hashedPassword,
     color: vehicle.color,
@@ -34,22 +34,20 @@ module.exports.registerCaptain = async (req, res, next) => {
   const token = captain.generateJwtToken();
 
   res.status(201).json({ token, captain });
-
-
 };
 
 module.exports.loginCaptain = async (req, res, next) => {
   const errors = validationResult(req);
 
-  if(!errors.isEmpty()){
+  if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
   const { email, password } = req.body;
 
-  const captain = await captainModel.findOne({email}).select("+password");
+  const captain = await captainModel.findOne({ email }).select("+password");
 
-  if(!captain){
+  if (!captain) {
     return res.status(401).json({ message: "Invalid Email or Password" });
   }
 
@@ -58,24 +56,22 @@ module.exports.loginCaptain = async (req, res, next) => {
   // console.log('input password:', password);
   // console.log(isMatch);
 
-  if(!isMatch){
+  if (!isMatch) {
     return res.status(401).json({ message: "Invalid Email or Password" });
   }
 
   const token = captain.generateJwtToken();
-  
+
   res.cookie("token", token);
 
-  return res.status(200).json({token, captain})
-}
-
+  return res.status(200).json({ token, captain });
+};
 
 module.exports.getCaptainProfile = async (req, res, next) => {
   res.status(200).json(req.captain);
-}
+};
 
 module.exports.logoutCaptain = async (req, res, next) => {
-
   const token = req.cookies.token || req.headers.authorization.split(" ")[1];
 
   await blacklistTokenModel.create({ token });
@@ -83,4 +79,4 @@ module.exports.logoutCaptain = async (req, res, next) => {
   res.clearCookie("token");
 
   res.status(200).json({ message: "Logout successful" });
-}
+};

@@ -1,15 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+import { useContext } from "react";
+import { CaptainDataContext } from "../context/CaptainContext";
 
 const CaptainLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [captainData, setCaptainData] = useState({});
 
-  const submitHandler = (e) => {
+  const navigate = useNavigate();
+  const { captain, setCaptain } = useContext(CaptainDataContext);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
     console.log(email, password);
-    setCaptainData({ email, password });
+    const captainData = { email, password };
+
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/captains/login`,
+      captainData
+    );
+
+    if (response.status === 200) {
+      const data = response.data;
+      setCaptain(data.captain);
+      localStorage.setItem("token", data.token);
+      navigate("/captain-home");
+    }
+
     setEmail("");
     setPassword("");
   };
@@ -22,7 +40,9 @@ const CaptainLogin = () => {
           src="https://www.svgrepo.com/show/505031/uber-driver.svg"
         />
         <form onSubmit={submitHandler}>
-          <h3 className="text-lg font-medium mb-2">What's our captain's email</h3>
+          <h3 className="text-lg font-medium mb-2">
+            What's our captain's email
+          </h3>
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}

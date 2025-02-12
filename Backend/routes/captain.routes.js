@@ -8,7 +8,7 @@ router.post(
   "/register",
   [
     body("email").isEmail().withMessage("Invalid Email"),
-    body("fullname.firstName")
+    body("fullname.firstname")
       .isLength({ min: 3 })
       .withMessage("First name must be at least 3 characters long"),
     body("password")
@@ -41,8 +41,16 @@ router.post(
   captainController.loginCaptain
 );
 
-router.get("/profile", authMiddleware.authcaptain, captainController.getCaptainProfile);
+router.get(
+  "/profile",
+  authMiddleware.authcaptain,
+  captainController.getCaptainProfile
+);
 
-router.get("/logout",authMiddleware.authcaptain, captainController.logoutCaptain);
+router.get(
+  "/logout",
+  authMiddleware.authcaptain,
+  captainController.logoutCaptain
+);
 
 module.exports = router;
